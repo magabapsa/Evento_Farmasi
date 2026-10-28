@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Exclusiva - Dolce Relax</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#111b36',
+                            900: '#0b1226',
+                            950: '#060a17',
+                        },
+                        gold: {
+                            300: '#f6e089',
+                            400: '#e5c158',
+                            500: '#d4af37',
+                            600: '#aa8823',
+                        },
+                        rose: {
+                            100: '#fce4ec',
+                            200: '#f8bbd0',
+                            300: '#f48fb1',
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styling for luxury spa vibe */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, rgba(248, 227, 235, 0.95), rgba(242, 215, 225, 0.95)), url('https://i.imgur.com/Gz4EsL3.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #2c243b;
+            overflow-x: hidden;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #9b7832 0%, #d4af37 50%, #634710 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border {
+            border: 1px solid rgba(212, 175, 55, 0.5);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px 0 rgba(100, 70, 90, 0.15);
+        }
+
+        .gold-button {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8823 100%);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .gold-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, #e5c158 0%, #bc9528 100%);
+        }
+
+        /* Sparkle & Float Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        .glow-bg {
+            animation: pulse-slow 6s ease-in-out infinite;
+        }
+
+        /* Text cycle animation */
+        .tagline-cycle {
+            display: inline-block;
+            animation: fadeInOut 4s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(5px); }
+            15% { opacity: 1; transform: translateY(0); }
+            85% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative bg-radial">
+
+    <!-- Ambient Glowing Background Effect -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-rose-300/30 rounded-full blur-3xl glow-bg"></div>
+        <div class="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-emerald-200/20 rounded-full blur-3xl glow-bg" style="animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Music Control Float Button -->
+    <button id="musicToggle" onclick="toggleMusic()" class="fixed top-5 right-5 z-50 bg-white/90 gold-border text-amber-700 p-3 rounded-full shadow-lg hover:scale-105 transition-all flex items-center justify-center w-12 h-12">
+        <i id="musicIcon" class="fas fa-music text-lg"></i>
+    </button>
+
+    <!-- Hidden Audio Player -->
+    <audio id="bgAudio" loop>
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=relaxing-spa-music-116337.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="relative z-10 max-w-lg mx-auto px-4 py-8 w-full flex-grow flex flex-col items-center">
+
+        <!-- HEADER / LOGOS -->
+        <header class="text-center w-full mb-6">
+            <!-- Custom Top Symbol -->
+            <div class="inline-block mb-3 floating">
+                <img src="https://i.imgur.com/Rq110dg.png" alt="Símbolo Exclusivo" class="w-14 h-14 mx-auto object-contain drop-shadow-md">
+            </div>
+            
+            <p class="font-cinzel text-xs tracking-[0.3em] uppercase text-amber-800/80 mb-1 font-semibold">Evento Especial</p>
+            <h1 class="font-cinzel text-3xl md:text-4xl font-bold tracking-wider gold-gradient-text uppercase drop-shadow-sm">
+                Invitación Exclusiva
+            </h1>
+            <p class="font-playfair italic text-amber-900/90 text-sm mt-1 h-6">
+                <span id="rotatingTagline" class="tagline-cycle font-semibold">Salud</span>
+            </p>
+        </header>
+
+        <!-- MAIN SPA BANNER CARD -->
+        <div class="w-full glass-card rounded-2xl p-6 text-center mb-6 relative overflow-hidden border border-amber-500/30">
+            <div class="absolute -top-10 -right-10 w-28 h-28 bg-amber-400/10 rounded-full blur-xl"></div>
+            
+            <!-- Spa Logo Transparent (Enlarged 200%) -->
+            <div class="mb-4 flex justify-center">
+                <img src="https://i.imgur.com/u728L91.png" alt="Dolce Relax Logo" class="h-32 object-contain drop-shadow">
+            </div>
+
+            <!-- SPA Image Container (object-contain to prevent cropping) -->
+            <div class="relative w-full h-64 rounded-xl overflow-hidden mb-5 border border-amber-400/30 shadow-md bg-black/10 flex items-center justify-center">
+                <img id="spaHeroImage" src="https://i.imgur.com/ONNN5qr.jpeg" 
+                     alt="Dolce Relax Spa Experience" 
+                     class="w-full h-full object-contain">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none"></div>
+                <div class="absolute bottom-3 left-3 right-3 text-left">
+                    <span class="inline-block bg-white/90 text-amber-800 text-xs px-2.5 py-1 rounded-full border border-amber-400/30 backdrop-blur-sm font-semibold">
+                        <i class="fas fa-sparkles mr-1 text-amber-600"></i> After Work Look Libre
+                    </span>
+                </div>
+            </div>
+
+            <!-- Event Details Pill -->
+            <div class="bg-white/80 border border-amber-400/40 rounded-xl p-4 mb-4 shadow-inner">
+                <div class="flex items-center justify-center space-x-3 text-amber-800 mb-1">
+                    <i class="far fa-calendar-alt text-xl"></i>
+                    <span class="font-cinzel text-2xl font-bold tracking-wide text-gray-900">20 DE NOVIEMBRE</span>
+                </div>
+                <p class="text-xs text-amber-900/70 tracking-widest uppercase font-medium">Reserva esta fecha</p>
+            </div>
+
+            <!-- COUNTDOWN TIMER -->
+            <div class="my-4">
+                <p class="text-xs font-cinzel text-amber-800 uppercase tracking-widest mb-2 font-bold">Faltan tan solo</p>
+                <div id="countdown" class="grid grid-cols-4 gap-2 text-center">
+                    <div class="bg-white/90 border border-amber-500/20 p-2 rounded-lg shadow-sm">
+                        <span id="days" class="font-cinzel text-xl font-bold text-amber-700">00</span>
+                        <span class="block text-[10px] text-gray-600 uppercase font-semibold">Días</span>
+                    </div>
+                    <div class="bg-white/90 border border-amber-500/20 p-2 rounded-lg shadow-sm">
+                        <span id="hours" class="font-cinzel text-xl font-bold text-amber-700">00</span>
+                        <span class="block text-[10px] text-gray-600 uppercase font-semibold">Horas</span>
+                    </div>
+                    <div class="bg-white/90 border border-amber-500/20 p-2 rounded-lg shadow-sm">
+                        <span id="minutes" class="font-cinzel text-xl font-bold text-amber-700">00</span>
+                        <span class="block text-[10px] text-gray-600 uppercase font-semibold">Min</span>
+                    </div>
+                    <div class="bg-white/90 border border-amber-500/20 p-2 rounded-lg shadow-sm">
+                        <span id="seconds" class="font-cinzel text-xl font-bold text-amber-700">00</span>
+                        <span class="block text-[10px] text-gray-600 uppercase font-semibold">Seg</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- HIGHLIGHTS / CAROUSEL -->
+        <div class="w-full glass-card rounded-2xl p-6 mb-6">
+            <h3 class="font-cinzel text-lg text-center text-amber-800 mb-4 tracking-wider font-bold">¿Qué disfrutaremos?</h3>
+            
+            <!-- Carousel Container (object-contain to prevent cropping) -->
+            <div class="relative w-full overflow-hidden rounded-xl shadow-md border border-amber-500/20 bg-black/10">
+                <div id="carouselTrack" class="flex transition-transform duration-500 ease-in-out">
+                    
+                    <!-- Slide 1: Bebidas Exclusivas -->
+                    <div class="w-full flex-shrink-0 relative h-72 flex items-center justify-center bg-neutral-900/40">
+                        <img src="https://i.imgur.com/n49Y95N.jpeg" alt="Bebidas Exclusivas" class="w-full h-full object-contain">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-4 pointer-events-none">
+                            <div class="text-white">
+                                <span class="bg-amber-600 text-white text-[10px] uppercase px-2 py-0.5 rounded font-semibold tracking-wider">Experiencia</span>
+                                <h4 class="font-cinzel text-xl font-bold text-amber-200 mt-1">Bebidas Exclusivas</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Snacks -->
+                    <div class="w-full flex-shrink-0 relative h-72 flex items-center justify-center bg-neutral-900/40">
+                        <img src="https://i.imgur.com/kOqmIvs.jpeg" alt="Snacks" class="w-full h-full object-contain">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-4 pointer-events-none">
+                            <div class="text-white">
+                                <span class="bg-amber-600 text-white text-[10px] uppercase px-2 py-0.5 rounded font-semibold tracking-wider">Gourmet</span>
+                                <h4 class="font-cinzel text-xl font-bold text-amber-200 mt-1">Snacks</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Morning Glow (No Title on image per instruction) -->
+                    <div class="w-full flex-shrink-0 relative h-72 flex items-center justify-center bg-neutral-900/40">
+                        <img src="https://i.imgur.com/Y46eFxE.jpeg" alt="Morning Glow" class="w-full h-full object-contain">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent flex items-end p-4 pointer-events-none">
+                            <div class="text-white">
+                                <span class="bg-amber-600 text-white text-[10px] uppercase px-2 py-0.5 rounded font-semibold tracking-wider">Bienestar</span>
+                                <h4 class="font-cinzel text-xl font-bold text-amber-200 mt-1">Morning Glow</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Sorpresas -->
+                    <div class="w-full flex-shrink-0 relative h-72 flex items-center justify-center bg-neutral-900/40">
+                        <img src="https://i.imgur.com/dE8fglG.jpeg" alt="Sorpresas" class="w-full h-full object-contain">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-4 pointer-events-none">
+                            <div class="text-white">
+                                <span class="bg-amber-600 text-white text-[10px] uppercase px-2 py-0.5 rounded font-semibold tracking-wider">Especial</span>
+                                <h4 class="font-cinzel text-xl font-bold text-amber-200 mt-1">Sorpresas</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5: Y mucho más -->
+                    <div class="w-full flex-shrink-0 relative h-72 flex items-center justify-center bg-neutral-900/40">
+                        <img src="https://i.imgur.com/8qXlOkm.jpeg" alt="Y mucho más" class="w-full h-full object-contain">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-4 pointer-events-none">
+                            <div class="text-white">
+                                <span class="bg-amber-600 text-white text-[10px] uppercase px-2 py-0.5 rounded font-semibold tracking-wider">Farmasi</span>
+                                <h4 class="font-cinzel text-xl font-bold text-amber-200 mt-1">Y mucho más...</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carousel Controls -->
+                <button onclick="prevSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60 transition-colors">
+                    <i class="fas fa-chevron-left text-sm"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60 transition-colors">
+                    <i class="fas fa-chevron-right text-sm"></i>
+                </button>
+
+                <!-- Dots Indicator -->
+                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-1.5 z-10">
+                    <button onclick="goToSlide(0)" class="w-2 h-2 rounded-full bg-white/70 transition-all dot-indicator" data-index="0"></button>
+                    <button onclick="goToSlide(1)" class="w-2 h-2 rounded-full bg-white/40 transition-all dot-indicator" data-index="1"></button>
+                    <button onclick="goToSlide(2)" class="w-2 h-2 rounded-full bg-white/40 transition-all dot-indicator" data-index="2"></button>
+                    <button onclick="goToSlide(3)" class="w-2 h-2 rounded-full bg-white/40 transition-all dot-indicator" data-index="3"></button>
+                    <button onclick="goToSlide(4)" class="w-2 h-2 rounded-full bg-white/40 transition-all dot-indicator" data-index="4"></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOCATION CARD WITH EXACT FACADE BACKGROUND -->
+        <div class="w-full rounded-2xl mb-6 text-center relative overflow-hidden shadow-xl border border-amber-500/40">
+            <!-- Background Facade Image with dark overlay for readability (object-cover is correct here so it fills the card background completely without gaps) -->
+            <div class="absolute inset-0 z-0">
+                <img src="https://i.imgur.com/oSIG1dV.jpeg" alt="Fachada Quinta Aurora Concept" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/55"></div>
+            </div>
+
+            <!-- Content on top of facade -->
+            <div class="relative z-10 p-6 text-white">
+                <div class="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center text-amber-300 mx-auto mb-3 border border-amber-400/40 backdrop-blur-sm">
+                    <i class="fas fa-map-marker-alt text-xl"></i>
+                </div>
+                <h3 class="font-cinzel text-lg text-amber-200 mb-2 font-bold">Ubicación del Evento</h3>
+                <p class="text-sm text-gray-100 mb-1 font-semibold">Los Palos Grandes</p>
+                <p class="text-xs text-gray-300 mb-4">4.ª avenida con 7.ª transversal, Quinta Aurora Concept</p>
+                
+                <a id="mapLink" href="https://maps.app.goo.gl/dy5EcjMZojoBPMg66" target="_blank" 
+                   class="inline-flex items-center space-x-2 text-xs text-amber-200 hover:text-white border border-amber-400/50 px-5 py-2.5 rounded-full transition-colors bg-black/40 backdrop-blur-sm font-semibold">
+                    <i class="fas fa-directions"></i>
+                    <span>Abrir en Google Maps</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="w-full space-y-3 mb-6">
+            <!-- WHATSAPP RSVP BUTTON -->
+            <a id="whatsappBtn" href="https://wa.me/584241500462?text=Quiero%20confirmar%20mi%20asistencia%20al%20Evento%20de%20Farmasi%20en%20Dolce%20Relax" target="_blank" 
+               class="gold-button w-full py-4 rounded-xl font-cinzel font-bold text-center tracking-wider block flex items-center justify-center space-x-2 text-base shadow-lg">
+                <i class="fab fa-whatsapp text-2xl text-emerald-300"></i>
+                <span>Confirmar Asistencia</span>
+            </a>
+
+            <!-- SAVE TO CALENDAR BUTTON -->
+            <button onclick="addToCalendar()" 
+                    class="w-full py-3 rounded-xl border border-amber-600/40 text-amber-900 bg-white/70 font-cinzel text-xs font-bold tracking-wider hover:bg-white transition-colors flex items-center justify-center space-x-2 shadow-sm">
+                <i class="far fa-calendar-plus text-base text-amber-700"></i>
+                <span>Guardar en mi Calendario</span>
+            </button>
+        </div>
+
+        <!-- SPECIAL FOOTER MESSAGE -->
+        <footer class="mt-4 text-center px-4">
+            <p class="font-playfair italic text-amber-900/90 text-sm leading-relaxed max-w-xs mx-auto">
+                "Si recibiste esta invitación, es por que eres alguien especial a la que esperamos ver y atender ese día"
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT FOR FUNCTIONALITY -->
+    <script>
+        // Music Player Toggle
+        const audio = document.getElementById('bgAudio');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.classList.remove('fa-pause');
+                musicIcon.classList.add('fa-music');
+            } else {
+                audio.play().then(() => {
+                    musicIcon.classList.remove('fa-music');
+                    musicIcon.classList.add('fa-pause');
+                }).catch(e => console.log("Audio playback blocked by browser"));
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Rotating Tagline Cycle
+        const taglines = ["Salud", "Belleza", "Bienestar", "Relajación"];
+        let currentTaglineIndex = 0;
+        const taglineElement = document.getElementById("rotatingTagline");
+
+        function rotateTagline() {
+            taglineElement.style.animation = 'none';
+            taglineElement.offsetHeight; // trigger reflow
+            taglineElement.textContent = taglines[currentTaglineIndex];
+            taglineElement.style.animation = 'fadeInOut 4s infinite';
+            currentTaglineIndex = (currentTaglineIndex + 1) % taglines.length;
+        }
+        setInterval(rotateTagline, 4000);
+
+        // Carousel Logic
+        let currentSlide = 0;
+        const totalSlides = 5;
+        const track = document.getElementById('carouselTrack');
+        const dots = document.querySelectorAll('.dot-indicator');
+
+        function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                if (index === currentSlide) {
+                    dot.classList.remove('bg-white/40');
+                    dot.classList.add('bg-white/90', 'w-4');
+                } else {
+                    dot.classList.remove('bg-white/90', 'w-4');
+                    dot.classList.add('bg-white/40', 'w-2');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        // Auto advance carousel every 5 seconds
+        let carouselInterval = setInterval(nextSlide, 5000);
+
+        // Pause auto-advance on hover/touch
+        const carouselContainer = document.getElementById('carouselTrack');
+        carouselContainer.addEventListener('mouseenter', () => clearInterval(carouselInterval));
+        carouselContainer.addEventListener('mouseleave', () => carouselInterval = setInterval(nextSlide, 5000));
+
+        // Countdown Timer Logic
+        const eventDate = new Date();
+        eventDate.setMonth(10); // Noviembre (0-indexed)
+        eventDate.setDate(20);
+        eventDate.setHours(10, 0, 0, 0);
+
+        if (new Date() > eventDate) {
+            eventDate.setFullYear(eventDate.getFullYear() + 1);
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventDate.getTime() - now;
+
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "<p class='col-span-4 text-amber-800 font-cinzel font-bold'>¡El evento es hoy!</p>";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Download Calendar (.ics file) Generator
+        function addToCalendar() {
+            const title = "Evento Exclusivo Dolce Relax & Farmasi";
+            const description = "Salud, Belleza, Bienestar y Relajación. After work, bebidas, snacks, morning glow y sorpresas.";
+            const location = "Quinta Aurora Concept, 4.ª avenida con 7.ª transversal, Los Palos Grandes";
+            
+            const year = eventDate.getFullYear();
+            const month = String(eventDate.getMonth() + 1).padStart(2, '0');
+            const day = String(eventDate.getDate()).padStart(2, '0');
+            
+            const startDate = `${year}${month}${day}T100000`;
+            const endDate = `${year}${month}${day}T140000`;
+
+            const icsContent = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Dolce Relax Farmasi Event//ES
+BEGIN:VEVENT
+SUMMARY:${title}
+DESCRIPTION:${description}
+LOCATION:${location}
+DTSTART:${startDate}
+DTEND:${endDate}
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Evento_Dolce_Relax_Farmasi.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
